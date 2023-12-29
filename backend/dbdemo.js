@@ -43,7 +43,7 @@ async function verifyUser(username, password) {
 // };
 
 // To get the username and password from the exported formData in Signup.jsx:
-const { formData } = require("./frontend/src/Components/Auth/Signup.jsx");
+const { formData } = require("../frontend/src/Components/Auth/Signup.jsx");
 
 (async function () {
   const isUserVerified = await verifyUser(formData.username, formData.password);
