@@ -1204,20 +1204,20 @@ app.get("/home/freenum", async (req, res) => {
 
 //---------------------------------------------------------------------------------
 //PORT LISTENING
-const { Client } = require('pg');
+// const { Client } = require('pg');
 
-const client = new Client({
-    connectionString: 'postgresql://user:password@0.tcp.in.ngrok.io:13408/mydb',
-    ssl: false 
-});
+// const client = new Client({
+//     connectionString: 'postgresql://user:password@0.tcp.in.ngrok.io:13408/mydb',
+//     ssl: false 
+// });
 
-client.connect((err) => {
-    if (err) {
-        console.error('Connection error:', err.stack);
-    } else {
-        console.log('Connected to PostgreSQL database');
-    }
-});
+// client.connect((err) => {
+//     if (err) {
+//         console.error('Connection error:', err.stack);
+//     } else {
+//         console.log('Connected to PostgreSQL database');
+//     }
+// });
 
 const port = process.env.PORT || 3000;
 
