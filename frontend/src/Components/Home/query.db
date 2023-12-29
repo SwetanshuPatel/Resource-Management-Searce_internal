@@ -1,0 +1,25 @@
+-- 1 resource, multiple projects = FOR RESOURCES
+--The last two are just for display.
+SELECT resources.resource_name,
+       STRING_AGG(projects.project_name, ', ') AS project_assigned,
+       resources.time_on_project,
+       resources.time_off_project,
+       resources.skill_learned_learning
+FROM projects
+JOIN resources ON projects.resource_name = resources.resource_name
+GROUP BY resources.resource_name, resources.time_on_project, resources.time_off_project, resources.skill_learned_learning, resources.resource_id;
+
+SELECT projects.project_name,
+       STRING_AGG(resources.resource_name, ', ') AS resource_names,
+       projects.project_stage,
+       projects.budget,
+       projects.start_date,
+       projects.delivery_date,
+       projects.region
+FROM projects
+JOIN resources ON projects.project_name = resources.project_assigned
+GROUP BY projects.project_name, projects.project_stage, projects.budget, projects.start_date, projects.delivery_date, projects.region;
+
+-- 1 project, multiple resources = FOR PROJECTS
+--The last two are just for display.
+-- For editing make sure the project id view is changed

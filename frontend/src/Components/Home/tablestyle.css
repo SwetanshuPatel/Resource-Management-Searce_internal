@@ -1,0 +1,21 @@
+.table-container-dashboard {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-container-dashboard th,
+.table-container-dashboard td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 0.1px solid black;
+}
+
+.table-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  /* border: 1px solid #ccc; */
+}
+
+.table-container-dashboard thead tr {
+  background-color: #f2f2f2;
+}

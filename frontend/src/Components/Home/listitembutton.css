@@ -1,0 +1,5 @@
+.list-item-button:hover .arrow-icon {
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #a5a8ac;
+}

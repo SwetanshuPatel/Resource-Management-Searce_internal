@@ -1,0 +1,9 @@
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 25%; /* Left should match the width of the panel */
+  background-color: #e0e0e0; /* Set the background color for the content area */
+  color: black; /* Set the text color for the content area */
+}

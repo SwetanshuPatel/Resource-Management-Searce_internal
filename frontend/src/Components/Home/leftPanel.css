@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.panelbar-wrapper {
+  position: relative;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: black;
+  /* color: black; */
+  height: 100vh;
+}
+
+.panelbar-wrapper .k-item:hover {
+  background-color: black;
+  color: white;
+}
+
+.teamMate:after {
+  content: ".";
+  display: block;
+  height: 0;
+  line-height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.teamMate h2 {
+  font-size: 1.3em;
+  font-weight: normal;
+  padding-top: 17px;
+  margin: 0;
+}
+
+.teamMate p {
+  margin: 0;
+  font-size: 0.8em;
+}
+
+.mate-info {
+  display: inline-block;
+  vertical-align: top;
+}
+
+my-app {
+  padding: 0 !important;
+}
+
+.k-drawer-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+.k-drawer-item {
+  user-select: none;
+}
+.k-icon {
+  font-size: 20px;
+}
+.custom-toolbar {
+  width: 100%;
+  background-color: #f6f6f6;
+  line-height: 10px;
+  border-bottom: inset;
+  border-bottom-width: 1px;
+  padding: 3px 8px;
+  color: #656565;
+}
+.mail-box {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 17px;
+}
+.page ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.page li {
+  font-size: 1.2em;
+  background: 0 0;
+  border-radius: 0;
+  border-width: 0 0 1px;
+  border-color: rgba(33, 37, 41, 0.125);
+  border-style: solid;
+  line-height: 1.5em;
+  padding: 1.09em 0.84em 1.23em 0.84em;
+}
+.page li:last-child {
+  border: 0;
+}

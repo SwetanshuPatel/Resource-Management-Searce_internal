@@ -1,0 +1,89 @@
+.budget-content {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.budget-total {
+  flex: 1;
+  font-size: 50px;
+  font-weight: bold;
+  color: black;
+}
+
+.budget-image {
+  background-position: right;
+  margin-left: 10px;
+}
+
+.customer-content {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.customer-total {
+  flex: 1;
+  font-size: 50px;
+  font-weight: bold;
+  color: black;
+}
+
+.customer-image {
+  background-position: right;
+  margin-left: 10px;
+}
+
+.resource-content {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.resource-total {
+  flex: 1;
+  font-size: 50px;
+  font-weight: bold;
+  color: black;
+}
+
+.resource-image {
+  background-position: right;
+  margin-left: 10px;
+}
+
+.progress-content {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .progress-total {
+    flex: 1;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .progress-image {
+    background-position: right;
+    margin-left: 10px;
+  }
+
+.forecast {
+  display: flex;
+  align-items: center;
+}
+
+.forecast .amount p {
+  color: green;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.up-arrow {
+  color: green;
+  font-size: 15px;
+  margin-right: 1px;
+  font-weight: bold;
+}

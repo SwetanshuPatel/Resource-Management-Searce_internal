@@ -1,0 +1,86 @@
+body {
+  background-color: #ffffff;
+}
+
+.formTitle {
+  background-color: #1876D1;
+  color: white;
+  padding: 10px 0 10px 20px;
+  width: 1400px;
+  margin-bottom: 20px;
+}
+
+.formContainer {
+  max-width: 600px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+}
+
+/* Form heading */
+.h1 {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Form labels and input fields */
+.formGroup {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+label {
+  font-weight: 500;
+  width: 40%; /* Adjust label width as needed */
+}
+
+input {
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 2px;
+  width: 50%; /* Adjust input width as needed */
+}
+
+.formContainer button {
+  margin-right: 200px;
+}
+
+button {
+  transition: background-color 0.6s;
+}
+
+.table-with-border {
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #ffffff; /* Set the border color and width */
+  width: 100%; /* Set the table width, adjust as needed */
+}
+.table-with-border th, .table-with-border td {
+  border: 1px solid #ffffff; /* Set cell borders */
+  padding: 8px; /* Add padding for cells */
+}
+
+.table-container {
+  table-layout: fixed;
+  width: 600px; /* Set a fixed width for the table */
+  border-collapse: collapse;
+}
+
+.table-container td {
+  padding: 0.5px;
+  border: 0px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table-container td:first-child {
+  width: 40%;
+}
+
+.table-container td:last-child {
+  width: 30%;
+}

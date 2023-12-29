@@ -1,0 +1,89 @@
+.pretty-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .list-item {
+    background-color:white;
+    border: 3px solid white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 50px rgba(56, 55, 55, 0.1);
+    display: flex;
+    transition: transform 0.2s;
+  }
+  
+  .list-item div {
+    margin-bottom: 5px;
+  }
+  
+  .list-item:hover {
+    transform: scale(1.02);
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: auto;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .button-container button {
+    margin-right: 8px;
+  }
+
+.button-wrapper {
+  display: inline-block;
+  margin-right: 2px;
+}
+
+.edit-button,
+.delete-button,
+.add-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-button {
+  color: #36a9e0; 
+}
+
+.delete-button {
+  color: #ff4f4f; 
+}
+
+.add-button {
+  color: black;
+}
+
+.edit-button:hover {
+  background-color: #36a9e0;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #ff4f4f;
+  color: white;
+}
+
+.add-button:hover {
+  background-color: black;
+  color: white;
+}
+
+ .complete-button {
+  padding: 2px 8px;
+  background-color: #fff;
+  color: green;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+ .complete-button:hover {
+  background-color: green;
+  color: white;
+}
