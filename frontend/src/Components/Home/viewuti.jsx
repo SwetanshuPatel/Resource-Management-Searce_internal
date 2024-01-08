@@ -30,6 +30,7 @@ function ViewUti() {
     fetchData();
   }, []);
 
+  //Fetch the data from the database
   const fetchData = async () => {
     try {
       const { data, status } = await axios.get(
@@ -46,6 +47,7 @@ function ViewUti() {
     }
   };
 
+  //Transforming the data to be displayed which can then be editted and saved successfully in the database, this is done because the data fetched is in the form of a complex query
   const transformData = (data) => {
     return data.map((item) => {
       const utilizations = item.utilizations

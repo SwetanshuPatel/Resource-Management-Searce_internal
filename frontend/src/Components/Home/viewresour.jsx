@@ -27,6 +27,7 @@ function ViewResour() {
     fetchData();
   }, []);
 
+  //Fetch the data from the database
   const fetchData = async () => {
     try {
       const { data, status } = await axios.get(

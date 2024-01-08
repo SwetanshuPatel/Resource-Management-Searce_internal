@@ -35,26 +35,26 @@ function Dashboard() {
   const [progressData, setprogressData] = useState([]);
   const [freenum, setfreenum] = useState("");
   let finalfree = Number.parseInt(freenum.count);
-  
-  if(isNaN(finalfree)){
+
+  if (isNaN(finalfree)) {
     finalfree = 0;
   }
 
-  if(isNaN(percent)){
+  if (isNaN(percent)) {
     percent = 0;
   }
 
   useEffect(() => {
-    getData();
-    getData1();
-    getData2();
-    getData3();
-    getData4();
-    getData5();
-    getData6();
-    getData7();
-    getData8();
-    getData9();
+    getData(); //The Budget Number
+    getData1(); //Customer Number
+    getData2(); //Resource Number
+    getData3(); //Progress Percentage
+    getData4(); //Forecast Number
+    getData5(); //Revenue Chart
+    getData6(); //Progress Chart
+    getData7(); //Opportunity Count under the customer field
+    getData8(); //Resource Progress Table
+    getData9(); //Free resource count
   }, []);
 
   const getData = async () => {
@@ -342,7 +342,7 @@ function Dashboard() {
                     <PieChart
                       series={[
                         {
-                          hidden:false,
+                          hidden: false,
                           data: revenueData,
                           innerRadius: 90,
                           outerRadius: 110,

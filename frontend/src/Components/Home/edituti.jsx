@@ -25,7 +25,7 @@ function NavigationButton() {
 function EditUti() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { u_id, projectName, resourceName } = location.state;
+  const { u_id, projectName, resourceName } = location.state; //Fetch the existing data
   const [Editsnack, setEditsnack] = React.useState(false);
 
   const [editedData, setEditedData] = useState({

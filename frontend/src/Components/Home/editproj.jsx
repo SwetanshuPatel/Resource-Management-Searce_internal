@@ -24,7 +24,7 @@ function EditProj() {
   const navigate = useNavigate();
   const location = useLocation();
   const { p_id, projectName, resourceName, sdate, ddate, projstage, region, resource_id } =
-    location.state;
+    location.state; //Fetch the existing data
   const [Editsnack, setEditsnack] = React.useState(false);
 
   const [editedData, setEditedData] = useState({

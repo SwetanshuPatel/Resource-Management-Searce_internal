@@ -62,6 +62,7 @@ function ViewInter() {
       });      
   }, []);
 
+  //Fetch the data from the database
   const getData = async () => {
     try {
       const { data, status } = await axios.get(

@@ -33,7 +33,7 @@ function SavenewProj() {
     region,
     budget,
     resource_id,
-  } = location.state;
+  } = location.state; //Fetch the existing data
   const [Editsnack, setEditsnack] = React.useState(false);
 
   const [editedData, setEditedData] = useState({
