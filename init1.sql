@@ -7,8 +7,6 @@ CREATE TABLE public.action_item (
     next_step character varying
 );
 
-ALTER TABLE public.action_item OWNER TO "swetanshu.patel";
-
 CREATE TABLE public.interactions (
     organizer character varying,
     project_name character varying,
@@ -18,8 +16,6 @@ CREATE TABLE public.interactions (
     interaction_id integer NOT NULL
 );
 
-ALTER TABLE public.interactions OWNER TO "swetanshu.patel";
-
 CREATE SEQUENCE public.interactions_action_item_id_seq
     AS integer
     START WITH 1
@@ -27,8 +23,6 @@ CREATE SEQUENCE public.interactions_action_item_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-ALTER SEQUENCE public.interactions_action_item_id_seq OWNER TO "swetanshu.patel";
 
 ALTER SEQUENCE public.interactions_action_item_id_seq OWNED BY public.interactions.action_item_id;
 
@@ -39,8 +33,6 @@ CREATE SEQUENCE public.interactions_interaction_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-ALTER SEQUENCE public.interactions_interaction_id_seq OWNER TO "swetanshu.patel";
 
 ALTER SEQUENCE public.interactions_interaction_id_seq OWNED BY public.interactions.interaction_id;
 
@@ -61,8 +53,6 @@ CREATE TABLE public.opportunities (
     opportunity_id integer NOT NULL
 );
 
-ALTER TABLE public.opportunities OWNER TO "swetanshu.patel";
-
 CREATE SEQUENCE public.opportunities_opportunity_id_seq
     AS integer
     START WITH 1
@@ -70,8 +60,6 @@ CREATE SEQUENCE public.opportunities_opportunity_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-ALTER SEQUENCE public.opportunities_opportunity_id_seq OWNER TO "swetanshu.patel";
 
 ALTER SEQUENCE public.opportunities_opportunity_id_seq OWNED BY public.opportunities.opportunity_id;
 
@@ -89,8 +77,6 @@ CREATE TABLE public.projects (
     project_id integer NOT NULL
 );
 
-ALTER TABLE public.projects OWNER TO "swetanshu.patel";
-
 CREATE SEQUENCE public.projects_project_id_seq
     AS integer
     START WITH 1
@@ -98,8 +84,6 @@ CREATE SEQUENCE public.projects_project_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-ALTER SEQUENCE public.projects_project_id_seq OWNER TO "swetanshu.patel";
 
 ALTER SEQUENCE public.projects_project_id_seq OWNED BY public.projects.project_id;
 
@@ -115,15 +99,11 @@ CREATE TABLE public.resources (
     project_id integer
 );
 
-ALTER TABLE public.resources OWNER TO "swetanshu.patel";
-
 CREATE TABLE public.users (
     name character varying NOT NULL,
     password character varying NOT NULL,
     email character varying NOT NULL
 );
-
-ALTER TABLE public.users OWNER TO "swetanshu.patel";
 
 CREATE TABLE public.utilization (
     resource_name character varying,
@@ -132,8 +112,6 @@ CREATE TABLE public.utilization (
     utilization_id integer NOT NULL
 );
 
-ALTER TABLE public.utilization OWNER TO "swetanshu.patel";
-
 CREATE SEQUENCE public.utilization_utilization_id_seq
     AS integer
     START WITH 1
@@ -141,8 +119,6 @@ CREATE SEQUENCE public.utilization_utilization_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-ALTER SEQUENCE public.utilization_utilization_id_seq OWNER TO "swetanshu.patel";
 
 ALTER SEQUENCE public.utilization_utilization_id_seq OWNED BY public.utilization.utilization_id;
 
