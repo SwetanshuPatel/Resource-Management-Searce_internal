@@ -2,28 +2,36 @@ Installing the application
 
 STEPS:
 
-1. Build the image, to build the image type this command in the terminal
+1. Build the image, to build the image type this command in the terminal:
    docker build -t mern-app .
 
-2. To run this image, type the command
+2. To run this image, type the command:
    docker run -p 3000:3000 -p 3001:3001 -p 5432:5432 --name mern-app-container mern-app
 
-3. Start the container and exec this command, this command will open a bash inside the container
+3. To start this container, type the following command:
+   docker start mern-app-container
+
+4. Start the container and exec this command, this command will open a bash inside the container:
    docker exec -it mern-app-container bash
 
-4. After the shell opens up move to the frontend directory,
-   cd frontend
+5. After that you can see the directory "rms" using the command:
+   ls
 
-5. After moving to the frontend directory start the frontend by using this command,
-   npm run start
+6. To move to "rms" directory:
+   cd rms
 
-6. Move back to the previous directory using command
-   cd ..
-
-7. Now move to the backend directory
+7. Now move to the backend directory:
    cd backend
 
-8. Start the backend local server which will listen to the api calls
+8. Start the backend local server which will listen to the api calls:
    npm run dev
+
+9. Open another tab and follow the above steps, this time you have to start the frontend server in another tab.
+
+10. After the shell opens up move to the frontend directory:
+    cd frontend
+
+11. After moving to the frontend directory start the frontend by using this command:
+    npm run start
 
 The app has now started working!!!
