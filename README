@@ -34,4 +34,6 @@ STEPS:
 11. After moving to the frontend directory start the frontend by using this command:
     npm run start
 
+12. Open the link shown in the terminal on your browser.
+
 The app has now started working!!!
