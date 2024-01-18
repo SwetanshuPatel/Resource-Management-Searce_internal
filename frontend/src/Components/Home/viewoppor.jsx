@@ -149,6 +149,7 @@ function ViewOppor() {
       estimated_amount: item.estimated_amount,
       stage: item.stage,
       closure_date: item.closure_date,
+      resource_id: item.resource_id,
       resource_name: item.resource_name,
       project_name: item.project_name,
       region: item.region,
@@ -162,6 +163,7 @@ function ViewOppor() {
     item.estimated_amount = editableValue.estimated_amount;
     item.stage = editableValue.stage;
     item.closure_date = editableValue.closure_date;
+    item.resource_id = editableValue.resource_id;
     item.resource_name = editableValue.resource_name;
     item.project_name = editableValue.project_name;
     item.region = editableValue.region;
@@ -174,12 +176,16 @@ function ViewOppor() {
         estimated_amount: item.estimated_amount,
         stage: item.stage,
         closure_date: item.closure_date,
+        resource_id: item.resource_id,
         resource_name: item.resource_name,
         project_name: item.project_name,
         region: item.region,
       })
       .then((response) => {
         console.log(response.data);
+        if(item.stage === "Opportunity Closed"){
+          handleMove(item);
+        }
         setEditsnack(true);
       })
       .catch((error) => {
@@ -191,9 +197,11 @@ function ViewOppor() {
   };
 
   const handleMove = (item) => {
+    console.log("hanldeMove called for item : ",item);
     item.estimated_amount = editableValue.estimated_amount;
     item.stage = editableValue.stage;
     item.closure_date = editableValue.closure_date;
+    item.resource_id = editableValue.resource_id;
     item.resource_name = editableValue.resource_name;
     item.project_name = editableValue.project_name;
     item.region = editableValue.region;
@@ -204,6 +212,7 @@ function ViewOppor() {
         stage: "Stage 0",
         start_date: "New Date Expected",
         closure_date: "New Date Expected",
+        resource_id: item.resource_id,
         resource_name: item.resource_name,
         project_name: item.project_name,
         region: item.region,
@@ -382,7 +391,7 @@ function ViewOppor() {
                             stage: newValue,
                           })
                         }
-                        options={stages}
+                        options={['Opportunity Open','Opportunity Closed']}
                         freeSolo
                         onInputChange={(e, newInputValue) => {
                           return newInputValue;
@@ -392,13 +401,7 @@ function ViewOppor() {
                       />
                     </span>
                   ) : (
-                    <span>
-                      {item.stage === "Opportunity Closed" ? (
-                        handleMove(item)
-                      ) : (
                         <span>{item.stage}</span>
-                      )}
-                    </span>
                   )}
                   <br></br>
                   <strong>Closure Date:</strong>{" "}
@@ -423,6 +426,30 @@ function ViewOppor() {
                     </span>
                   ) : (
                     <span>{item.closure_date}</span>
+                  )}
+                  <br></br>
+                  <strong>Resource ID:</strong>{" "}
+                  {editableField === item.opportunity_id ? (
+                    <span>
+                      <Autocomplete
+                        value={editableValue.resource_id}
+                        onChange={(e, newValue) =>
+                          setEditableValue({
+                            ...editableValue,
+                            resource_id: newValue,
+                          })
+                        }
+                        options={[]}
+                        freeSolo
+                        onInputChange={(e, newInputValue) => {
+                          return newInputValue;
+                        }}
+                        getOptionSelected={(option, value) => option === value}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </span>
+                  ) : (
+                    <span>{item.resource_id}</span>
                   )}
                   <br></br>
                   <strong>Resource Name:</strong>{" "}

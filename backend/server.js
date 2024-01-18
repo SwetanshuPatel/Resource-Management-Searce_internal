@@ -108,6 +108,7 @@ app.post("/home/create_oppor", async (req, res) => {
     oname,
     stage,
     date,
+    rid,
     resources,
     projname,
     region,
@@ -119,13 +120,14 @@ app.post("/home/create_oppor", async (req, res) => {
     oname,
     stage,
     date,
+    Number.parseInt(rid),
     resources,
     projname,
     region,
   ];
 
   const query =
-    "INSERT INTO OPPORTUNITIES VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
+    "INSERT INTO OPPORTUNITIES VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
 
   await pool.query(query, values, (err) => {
     if (err) {
@@ -147,13 +149,14 @@ app.put("/home/update_oppor/:id", async (req, res) => {
     estimated_amount,
     stage,
     closure_date,
+    resource_id,
     resource_name,
     project_name,
     region,
   } = req.body;
 
   const query =
-    "UPDATE OPPORTUNITIES SET opportunity_name = $1, consultant_name = $2, poc_name = $3, estimated_amount = $4, stage = $5, closure_date = $6, resource_name = $7, project_name = $8, region = $9 WHERE opportunity_id = $10";
+    "UPDATE OPPORTUNITIES SET opportunity_name = $1, consultant_name = $2, poc_name = $3, estimated_amount = $4, stage = $5, closure_date = $6, resource_id = $7, resource_name = $8, project_name = $9, region = $10 WHERE opportunity_id = $11";
 
   const values = [
     opportunity_name,
@@ -162,6 +165,7 @@ app.put("/home/update_oppor/:id", async (req, res) => {
     Number.parseInt(estimated_amount),
     stage,
     closure_date,
+    Number.parseInt(resource_id),
     resource_name,
     project_name,
     region,
@@ -186,6 +190,7 @@ app.post("/home/move_oppor/:id", async (req, res) => {
     stage,
     start_date,
     closure_date,
+    resource_id,
     resource_name,
     project_name,
     region,
@@ -198,18 +203,18 @@ app.post("/home/move_oppor/:id", async (req, res) => {
     region,
     Number.parseInt(estimated_amount),
     start_date,
+    Number.parseInt(resource_id),
   ];
 
-  const query = "INSERT INTO PROJECTS VALUES ($1, $2, $3, $4, $5, $6, $7)";
+  const query = "INSERT INTO PROJECTS VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
 
-  await pool.query(query, values, (err) => {
-    if (err) {
-      console.error("Error Moving: ", err);
-      res.status(500).send("Error Moving");
-    } else {
-      res.status(200).send("Data Moved");
-    }
-  });
+  try {
+    await pool.query(query, values);
+    res.status(200).send("Data Moved");
+  } catch (err) {
+    console.error("Error Moving: ", err);
+    res.status(500).send("Error Moving");
+  }
 });
 
 //GET CONSULTANT
@@ -334,7 +339,7 @@ app.post("/home/create_proj", async (req, res) => {
     region,
     Number.parseInt(budget),
     sdate,
-    r_id
+    r_id,
   ];
 
   const query = "INSERT INTO PROJECTS VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
@@ -376,7 +381,7 @@ app.put("/home/update_Proj/:id", async (req, res) => {
     delivery_date,
     resource_name,
     region,
-    resource_id
+    resource_id,
   } = req.body;
 
   const query =
@@ -414,11 +419,10 @@ app.put("/home/update_resourProj/:id", async (req, res) => {
     resource_name,
     region,
     budget,
-    resource_id
+    resource_id,
   } = req.body;
 
-  const query =
-    "INSERT INTO PROJECTS VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
+  const query = "INSERT INTO PROJECTS VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
 
   const values = [
     project_name,
@@ -551,12 +555,7 @@ app.get("/home/view_inter", async (req, res) => {
 //CREATE
 app.post("/home/create_inter", async (req, res) => {
   const { organizer, pname, date, summary } = req.body;
-  const values = [
-    organizer,
-    pname,
-    date,
-    summary
-  ];
+  const values = [organizer, pname, date, summary];
 
   const query = "INSERT INTO INTERACTIONS VALUES ($1, $2, $3, $4)";
 
@@ -590,12 +589,7 @@ app.delete("/delete_inter/:id", (req, res) => {
 //EDIT
 app.put("/home/update_inter/:id", async (req, res) => {
   const itemid = req.params.id;
-  const {
-    organizer,
-    project_name,
-    date_and_time,
-    action_item_id,
-  } = req.body;
+  const { organizer, project_name, date_and_time, action_item_id } = req.body;
 
   const query =
     "UPDATE INTERACTIONS SET organizer = $1, project_name = $2, date_and_time = $3, action_item_id = $4 WHERE interaction_id = $5";
@@ -683,16 +677,8 @@ app.get("/home/view_resour", async (req, res) => {
 
 //CREATE
 app.post("/home/create_resour", async (req, res) => {
-  const { r_id, rname, currproject, timeon, timeoff, skill } =
-    req.body;
-  const values = [
-    rname,
-    currproject,
-    timeon,
-    timeoff,
-    skill,
-    r_id
-  ];
+  const { r_id, rname, currproject, timeon, timeoff, skill } = req.body;
+  const values = [rname, currproject, timeon, timeoff, skill, r_id];
 
   const query = "INSERT INTO RESOURCES VALUES ($1, $2, $3, $4, $5, $6)";
 
@@ -734,7 +720,7 @@ app.put("/home/update_resour/:id", async (req, res) => {
     const values = [resourlabel, projlabel, ontime, offtime, skill, itemid];
 
     await pool.query(query, values);
-    
+
     res.status(200).send("Data Edited");
   } catch (err) {
     console.error("Error editing: ", err);
@@ -1014,7 +1000,9 @@ app.get("/home/getprojects", async (req, res) => {
 app.get("/home/budget", async (req, res) => {
   try {
     const client = await pool.connect();
-    const result = await client.query("SELECT SUM(total_budget) AS sum FROM (SELECT project_name, SUM(DISTINCT budget) AS total_budget FROM projects GROUP BY project_name);");
+    const result = await client.query(
+      "SELECT SUM(total_budget) AS sum FROM (SELECT project_name, SUM(DISTINCT budget) AS total_budget FROM projects GROUP BY project_name);"
+    );
     client.release();
     const sum = result.rows[0].sum;
     res.status(200).json({ sum });
@@ -1192,7 +1180,8 @@ app.get("/home/freenum", async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query(
-      "SELECT COUNT(DISTINCT resource_name) AS total_count FROM utilization WHERE billable_in_percent = 0;");
+      "SELECT COUNT(DISTINCT resource_name) AS total_count FROM utilization WHERE billable_in_percent = 0;"
+    );
     client.release();
     const count = result.rows[0].total_count;
     res.status(200).json({ count });
@@ -1208,7 +1197,7 @@ app.get("/home/freenum", async (req, res) => {
 
 // const client = new Client({
 //     connectionString: 'postgresql://user:password@0.tcp.in.ngrok.io:13408/mydb',
-//     ssl: false 
+//     ssl: false
 // });
 
 // client.connect((err) => {

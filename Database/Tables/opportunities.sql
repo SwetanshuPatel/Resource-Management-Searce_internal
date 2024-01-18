@@ -21,24 +21,24 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: opportunities; Type: TABLE; Schema: public; Owner: swetanshu.patel
+-- Name: opportunities; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.opportunities (
     consultant_name character varying,
     poc_name character varying,
     estimated_amount integer,
-    oppotunity_name character varying,
+    opportunity_name character varying,
     stage character varying,
     closure_date character varying,
+    resource_id integer,
     resource_name character varying,
     project_name character varying,
     region character varying,
     opportunity_id integer NOT NULL
 );
 
-
-ALTER TABLE public.opportunities OWNER TO "swetanshu.patel";
+-- ALTER TABLE public.opportunities OWNER TO "swetanshu.patel";
 
 --
 -- Name: opportunities_opportunity_id_seq; Type: SEQUENCE; Schema: public; Owner: swetanshu.patel
@@ -53,7 +53,7 @@ CREATE SEQUENCE public.opportunities_opportunity_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.opportunities_opportunity_id_seq OWNER TO "swetanshu.patel";
+-- ALTER SEQUENCE public.opportunities_opportunity_id_seq OWNER TO "swetanshu.patel";
 
 --
 -- Name: opportunities_opportunity_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: swetanshu.patel

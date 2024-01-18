@@ -33,6 +33,7 @@ function Form() {
     oname: "",
     stage: "",
     date: "",
+    rid: "",
     resources: "",
     projname: "",
     region: "",
@@ -128,6 +129,16 @@ function Form() {
             type="text"
             name="date"
             value={data.date}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="formGroup">
+          <label>Resource ID:</label>
+          <input
+            type="text"
+            name="rid"
+            value={data.rid}
             onChange={handleInputChange}
           />
         </div>
