@@ -109,6 +109,7 @@ function ViewInter() {
     setEditableValue({
       organizer: item.organizer,
       project_name: item.project_name,
+      resource_name: item.resource_name,
       date_and_time: item.date_and_time,
       action_item_id: item.action_item_id,
       summary: item.summary
@@ -118,6 +119,7 @@ function ViewInter() {
   const handleSave = (item) => {
     item.organizer = editableValue.organizer;
     item.project_name = editableValue.project_name;
+    item.resource_name = editableValue.resource_name;
     item.date_and_time = editableValue.date_and_time;
     item.action_item_id = editableValue.action_item_id;
     item.summary = editableValue.summary;
@@ -126,6 +128,7 @@ function ViewInter() {
       .put(`http://localhost:3000/home/update_inter/${item.interaction_id}`, {
         organizer: item.organizer,
         project_name: item.project_name,
+        resource_name: item.resource_name,
         date_and_time: item.date_and_time,
         action_item_id: item.action_item_id,
         summary: item.summary
@@ -231,6 +234,30 @@ function ViewInter() {
                     </span>
                   ) : (
                     <span>{item.organizer}</span>
+                  )}
+                  <br></br>
+                  <strong>Resource Name:</strong>{" "}
+                  {editableField === item.interaction_id ? (
+                    <span>
+                      <Autocomplete
+                        value={editableValue.resource_name}
+                        onChange={(e, newValue) =>
+                          setEditableValue({
+                            ...editableValue,
+                            resource_name: newValue,
+                          })
+                        }
+                        options={[]}
+                        freeSolo
+                        onInputChange={(e, newInputValue) => {
+                          return newInputValue;
+                        }}
+                        getOptionSelected={(option, value) => option === value}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </span>
+                  ) : (
+                    <span>{item.resource_name}</span>
                   )}
                   <br></br>
                   <strong>Date & Time:</strong>{" "}

@@ -4,12 +4,14 @@ SET lock_timeout = 0;
 CREATE TABLE public.action_item (
     action_item_id integer,
     project_name character varying,
+    resource_name character varying,
     next_step character varying
 );
 
 CREATE TABLE public.interactions (
     organizer character varying,
     project_name character varying,
+    resource_name character varying,
     date_and_time character varying,
     summary character varying,
     action_item_id integer NOT NULL,
@@ -168,11 +170,12 @@ $function$;
 CREATE OR REPLACE FUNCTION insert_or_update_action_item() RETURNS trigger LANGUAGE plpgsql AS $function$
 BEGIN
     IF TG_OP = 'INSERT' THEN
-        INSERT INTO action_item (project_name, action_item_id, next_step)
-        VALUES (NEW.project_name, NEW.action_item_id, 'Please Enter...');
+        INSERT INTO action_item (project_name, resource_name, action_item_id, next_step)
+        VALUES (NEW.project_name, NEW.resource_name, NEW.action_item_id, 'Please Enter...');
     ELSIF TG_OP = 'UPDATE' THEN
         UPDATE action_item
         SET project_name = NEW.project_name,
+            resource_name = NEW.resource_name,
             action_item_id = NEW.action_item_id,
             next_step = NEW.next_step
         WHERE action_item_id = NEW.action_item_id;

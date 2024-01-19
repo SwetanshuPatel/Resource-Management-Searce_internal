@@ -4,7 +4,7 @@ import "./viewoppor.css";
 import AddIcon from "@mui/icons-material/Add";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
-import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import SaveIcon from "@mui/icons-material/Save";
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
@@ -51,7 +51,6 @@ function ViewAcI() {
       .catch((error) => {
         console.error("Error fetching resources", error);
       });
-
   }, []);
 
   //Fetch the data from the database
@@ -194,6 +193,31 @@ function ViewAcI() {
                     <span>{item.project_name}</span>
                   )}
                   <hr width="90%" color="black"></hr>
+                  <br/>
+                  <strong>Resource Name:</strong>{" "}
+                  {editableField === item.action_item_id ? (
+                    <span>
+                      <Autocomplete
+                        value={editableValue.resource_name}
+                        onChange={(e, newValue) =>
+                          setEditableValue({
+                            ...editableValue,
+                            resource_name: newValue,
+                          })
+                        }
+                        options={[]}
+                        freeSolo
+                        onInputChange={(e, newInputValue) => {
+                          return newInputValue;
+                        }}
+                        getOptionSelected={(option, value) => option === value}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </span>
+                  ) : (
+                    <span>{item.resource_name}</span>
+                  )}
+                  
                   <br />
                   <strong>Action Item ID:</strong>{" "}
                   {editableField === item.action_item_id ? (
@@ -244,7 +268,7 @@ function ViewAcI() {
                   )}
                 </div>
                 <div className="button-container">
-                <div className="button-wrapper">
+                  <div className="button-wrapper">
                     <button
                       className="complete-button"
                       onClick={() => handleDelete(item.action_item_id)}

@@ -27,6 +27,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public.interactions (
     organizer character varying,
     project_name character varying,
+    resource_name character varying,
     date_and_time character varying,
     summary character varying,
     action_item_id integer NOT NULL,
@@ -34,7 +35,7 @@ CREATE TABLE public.interactions (
 );
 
 
-ALTER TABLE public.interactions OWNER TO "swetanshu.patel";
+-- ALTER TABLE public.interactions OWNER TO "swetanshu.patel";
 
 --
 -- Name: interactions_action_item_id_seq; Type: SEQUENCE; Schema: public; Owner: swetanshu.patel
@@ -49,7 +50,7 @@ CREATE SEQUENCE public.interactions_action_item_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.interactions_action_item_id_seq OWNER TO "swetanshu.patel";
+-- ALTER SEQUENCE public.interactions_action_item_id_seq OWNER TO "swetanshu.patel";
 
 --
 -- Name: interactions_action_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: swetanshu.patel
@@ -71,7 +72,7 @@ CREATE SEQUENCE public.interactions_interaction_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.interactions_interaction_id_seq OWNER TO "swetanshu.patel";
+-- ALTER SEQUENCE public.interactions_interaction_id_seq OWNER TO "swetanshu.patel";
 
 --
 -- Name: interactions_interaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: swetanshu.patel

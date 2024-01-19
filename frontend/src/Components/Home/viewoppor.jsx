@@ -25,7 +25,7 @@ function ViewOppor() {
   const [Movesnack, setMovesnack] = React.useState(false);
   const [consultNames, setconsultNames] = useState([]);
   const [pocNames, setpocNames] = useState([]);
-  const [stages, setstage] = useState([]);
+  // const [stages, setstage] = useState([]);
   const [resourceNames, setresource] = useState([]);
   const [projectNames, setproject] = useState([]);
   const [regions, setregion] = useState([]);
@@ -58,14 +58,14 @@ function ViewOppor() {
       });
 
     //GET DISTINCT STAGE
-    axios
-      .get("http://localhost:3000/home/getstage")
-      .then((response) => {
-        setstage(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching resources", error);
-      });
+    // axios
+    //   .get("http://localhost:3000/home/getstage")
+    //   .then((response) => {
+    //     setstage(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching resources", error);
+    //   });
 
     //GET DISTINCT RESOURCES
     axios

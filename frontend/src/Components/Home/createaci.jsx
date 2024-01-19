@@ -24,6 +24,7 @@ function Form() {
   const [data, setData] = useState({
     A_id: '',
     pname: '',
+    rname: '',
     step: '',
   });
 
@@ -75,6 +76,16 @@ function Form() {
             type="text"
             name="pname"
             value={data.pname}
+            onChange={handleInputChange}
+          />
+        </div>
+        <br></br>
+        <div className="formGroup">
+          <label>Resource Name:</label>
+          <input
+            type="text"
+            name="rname"
+            value={data.rname}
             onChange={handleInputChange}
           />
         </div>

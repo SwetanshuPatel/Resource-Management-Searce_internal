@@ -554,10 +554,10 @@ app.get("/home/view_inter", async (req, res) => {
 
 //CREATE
 app.post("/home/create_inter", async (req, res) => {
-  const { organizer, pname, date, summary } = req.body;
-  const values = [organizer, pname, date, summary];
+  const { organizer, pname, rname, date, summary } = req.body;
+  const values = [organizer, pname, rname, date, summary];
 
-  const query = "INSERT INTO INTERACTIONS VALUES ($1, $2, $3, $4)";
+  const query = "INSERT INTO INTERACTIONS VALUES ($1, $2, $3, $4, $5)";
 
   await pool.query(query, values, (err) => {
     if (err) {
@@ -589,14 +589,15 @@ app.delete("/delete_inter/:id", (req, res) => {
 //EDIT
 app.put("/home/update_inter/:id", async (req, res) => {
   const itemid = req.params.id;
-  const { organizer, project_name, date_and_time, action_item_id } = req.body;
+  const { organizer, project_name, resource_name, date_and_time, action_item_id } = req.body;
 
   const query =
-    "UPDATE INTERACTIONS SET organizer = $1, project_name = $2, date_and_time = $3, action_item_id = $4 WHERE interaction_id = $5";
+    "UPDATE INTERACTIONS SET organizer = $1, project_name = $2, resource_name = $3, date_and_time = $4, action_item_id = $5 WHERE interaction_id = $6";
 
   const values = [
     organizer,
     project_name,
+    resource_name,
     date_and_time,
     Number.parseInt(action_item_id),
     itemid,
@@ -809,10 +810,10 @@ app.get("/home/view_AcI", async (req, res) => {
 
 //CREATE
 app.post("/home/create_AcI", async (req, res) => {
-  const { A_id, pname, step } = req.body;
-  const values = [Number.parseInt(A_id), pname, step];
+  const { A_id, pname, rname, step } = req.body;
+  const values = [Number.parseInt(A_id), pname, rname, step];
 
-  const query = "INSERT INTO ACTION_ITEM VALUES ($1, $2, $3)";
+  const query = "INSERT INTO ACTION_ITEM VALUES ($1, $2, $3, $4)";
 
   await pool.query(query, values, (err) => {
     if (err) {
@@ -844,11 +845,11 @@ app.delete("/delete_AcI/:id", (req, res) => {
 //EDIT
 app.put("/home/update_AcI/:id", async (req, res) => {
   const itemid = req.params.id;
-  const { action_item_id, project_name, next_step } = req.body;
+  const { action_item_id, project_name, resource_name, next_step } = req.body;
   const query =
-    "UPDATE ACTION_ITEM SET action_item_id = $1, project_name = $2, next_step = $3 WHERE action_item_id = $4";
+    "UPDATE ACTION_ITEM SET action_item_id = $1, project_name = $2, resource_name = $3, next_step = $4 WHERE action_item_id = $5";
 
-  const values = [action_item_id, project_name, next_step, itemid];
+  const values = [action_item_id, project_name, resource_name, next_step, itemid];
 
   await pool.query(query, values, (err) => {
     if (err) {
