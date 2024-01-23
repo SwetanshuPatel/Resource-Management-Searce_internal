@@ -1,6 +1,6 @@
 FROM postgres:latest
 
-# environment variables for PostgreSQL
+# Set environment variables for PostgreSQL
 ENV POSTGRES_DB rms
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD password
@@ -15,36 +15,30 @@ ENV PORT 3000
 
 # Install PostgreSQL client for database initialization
 RUN apt-get update && apt-get install -y postgresql-client
-RUN apt install npm -y
+
+# Install Node.js and Yarn
+RUN apt-get install -y nodejs npm
+RUN npm install -g yarn
 
 # Expose the PostgreSQL port
 EXPOSE 5432
 
 # Copy init.sql to the container's initialization directory
-COPY init1.sql /docker-entrypoint-initdb.d/init1.sql
+COPY Database/init1.sql /docker-entrypoint-initdb.d/init1.sql
 
-# Set working directory
+# Create working directory for the application
 WORKDIR /usr/src/app
 
-# Create a directory named "rms"
-RUN mkdir rms
+# Create backend and frontend directories
+RUN mkdir -p rms/backend rms/frontend
 
 # Set working directory to /usr/src/app/rms
 WORKDIR /usr/src/app/rms
 
-# Create backend and frontend directories inside "rms"
-RUN mkdir backend
-RUN mkdir frontend
-
-# Set working directory to /usr/src/app/rms/backend
-WORKDIR /usr/src/app/rms/backend
-
-# Copy package.json and package-lock.json for backend
+# Copy backend package files and install dependencies
 COPY ./backend/package*.json ./
-
-# Install backend dependencies
-RUN npm install
-RUN npm install nodemon -y
+RUN yarn install
+RUN yarn global add nodemon
 
 # Copy the rest of the backend code
 COPY ./backend/ ./
@@ -52,23 +46,15 @@ COPY ./backend/ ./
 # Expose the backend port
 EXPOSE 3000
 
-# Set working directory to /usr/src/app/rms
-WORKDIR /usr/src/app/rms
-
 # Set working directory to /usr/src/app/rms/frontend
 WORKDIR /usr/src/app/rms/frontend
 
-# Copy package.json and package-lock.json for frontend
+# Copy frontend package files and install dependencies
 COPY ./frontend/package*.json ./
-
-# Install frontend dependencies
-RUN npm install
+RUN yarn install
 
 # Copy the rest of the frontend code
 COPY ./frontend/ ./
 
 # Expose the frontend port
 EXPOSE 3001
-
-# Set working directory to /usr/src/app
-WORKDIR /usr/src/app
