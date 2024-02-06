@@ -15,7 +15,8 @@
   "main": "db.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build": "echo 'No build step needed for Node.js applications.'"
   },
   "keywords": [],
   "author": "",

@@ -1,6 +1,6 @@
-FROM postgres:latest
+FROM postgres
 
-# Set environment variables for PostgreSQL
+# environment variables for PostgreSQL
 ENV POSTGRES_DB rms
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD password
@@ -13,12 +13,12 @@ ENV DB_PASSWORD password
 ENV DB_PORT 5432
 ENV PORT 3000
 
+#Clear package cache
+RUN apt-get clean
+RUN apt-get update
 # Install PostgreSQL client for database initialization
 RUN apt-get update && apt-get install -y postgresql-client
-
-# Install Node.js and Yarn
-RUN apt-get install -y nodejs npm
-RUN npm install -g yarn
+RUN apt-get update && apt-get -y install curl && apt-get -y install gnupg && curl -sL https://deb.nodesource.com/setup_14.x | bash && apt-get install -y nodejs && curl -L https://www.npmjs.com/install.sh | sh && npm install -g npm@6.14.13 
 
 # Expose the PostgreSQL port
 EXPOSE 5432
@@ -26,19 +26,28 @@ EXPOSE 5432
 # Copy init.sql to the container's initialization directory
 COPY Database/init1.sql /docker-entrypoint-initdb.d/init1.sql
 
-# Create working directory for the application
+# Set working directory
 WORKDIR /usr/src/app
 
-# Create backend and frontend directories
-RUN mkdir -p rms/backend rms/frontend
+# Create a directory named "rms"
+RUN mkdir rms
 
 # Set working directory to /usr/src/app/rms
 WORKDIR /usr/src/app/rms
 
-# Copy backend package files and install dependencies
+# Create backend and frontend directories inside "rms"
+RUN mkdir backend
+RUN mkdir frontend
+
+# Set working directory to /usr/src/app/rms/backend
+WORKDIR /usr/src/app/rms/backend
+
+# Copy package.json and package-lock.json for backend
 COPY ./backend/package*.json ./
-RUN yarn install
-RUN yarn global add nodemon
+
+# Install backend dependencies
+RUN npm install
+RUN npm install nodemon -y
 
 # Copy the rest of the backend code
 COPY ./backend/ ./
@@ -46,15 +55,23 @@ COPY ./backend/ ./
 # Expose the backend port
 EXPOSE 3000
 
+# Set working directory to /usr/src/app/rms
+WORKDIR /usr/src/app/rms
+
 # Set working directory to /usr/src/app/rms/frontend
 WORKDIR /usr/src/app/rms/frontend
 
-# Copy frontend package files and install dependencies
+# Copy package.json and package-lock.json for frontend
 COPY ./frontend/package*.json ./
-RUN yarn install
+
+# Install frontend dependencies
+RUN npm install
 
 # Copy the rest of the frontend code
 COPY ./frontend/ ./
 
 # Expose the frontend port
 EXPOSE 3001
+
+# Set working directory to /usr/src/app
+WORKDIR /usr/src/app
