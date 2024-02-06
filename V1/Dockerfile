@@ -47,7 +47,7 @@ COPY ./backend/package*.json ./
 
 # Install backend dependencies
 RUN npm install
-RUN npm install nodemon -y
+RUN npm install -y nodemon
 
 # Copy the rest of the backend code
 COPY ./backend/ ./
