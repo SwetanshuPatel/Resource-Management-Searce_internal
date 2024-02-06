@@ -1,0 +1,71 @@
+# Stage 1: Build backend and frontend
+FROM node:14 AS builder
+
+# Set working directory for the build
+WORKDIR /usr/src/app/rms
+
+# Copy both backend and frontend package files
+COPY ./backend/package*.json ./backend/
+COPY ./frontend/package*.json ./frontend/
+
+# Install dependencies for both backend and frontend
+RUN apt-get update && apt-get install -y npm
+RUN npm install --prefix ./backend/
+RUN npm install --prefix ./frontend/
+
+# Copy the rest of the backend and frontend code
+COPY ./backend/ ./backend/
+COPY ./frontend/ ./frontend/
+
+# Build backend and frontend
+RUN npm run build --prefix ./backend/
+RUN npm run build --prefix ./frontend/
+
+# Stage 2: Final image with PostgreSQL, backend/frontend artifacts, and database initialization script
+FROM postgres
+
+# environment variables for PostgreSQL
+ENV POSTGRES_DB rms
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD password
+
+# environment variables for the backend
+ENV DB_USER postgres
+ENV DB_HOST localhost
+ENV DB_DATABASE rms
+ENV DB_PASSWORD password
+ENV DB_PORT 5432
+ENV PORT 3000
+
+# Clear package cache
+RUN apt-get clean
+RUN apt-get update
+
+# Install PostgreSQL client for database initialization
+RUN apt-get update && apt-get install -y postgresql-client
+
+# Set working directory
+WORKDIR /usr/src/app/rms
+
+# Copy both backend and frontend artifacts from the builder stage
+COPY --from=builder /usr/src/app/rms/backend /usr/src/app/rms/backend
+COPY --from=builder /usr/src/app/rms/frontend /usr/src/app/rms/frontend
+
+# Copy init1.sql for database initialization
+COPY Database/init1.sql /docker-entrypoint-initdb.d/init1.sql
+
+# Expose the backend port
+EXPOSE 3000
+
+# Expose the frontend port
+EXPOSE 3001
+
+# Expose the Database port
+EXPOSE 5432
+
+# Set working directory to /usr/src/app/rms
+WORKDIR /usr/src/app/rms
+
+# In this docker image you have you explicitly install npm after logging in the docker container
+# Use this command to install npm
+# apt-get update && apt-get -y install curl && apt-get -y install gnupg && curl -sL https://deb.nodesource.com/setup_14.x | bash && apt-get install -y nodejs && curl -L https://www.npmjs.com/install.sh | sh && npm install -g npm@6.14.13
