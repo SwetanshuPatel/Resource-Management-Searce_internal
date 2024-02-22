@@ -2,17 +2,17 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const session = require("express-session");
+const session = require("cookie-session");
 const app = express();
 const passportSetup = require("./passport");
 const authroute = require("./routes/auth");
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 
 app.use(
   session({
-    secret: "user_rms",
-    resave: false,
-    saveUninitialized: true,
+    name: "session",
+    keys: ["secret_keys"],
+    maxAge: 24 * 60 * 60 * 100,
   })
 );
 

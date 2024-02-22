@@ -5,9 +5,16 @@ import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { Button } from "@nextui-org/react";
 import { Divider } from "@nextui-org/react";
 import { GoogleIcon } from "./GoogleIcon";
+import "./lock.css";
+import { LoginBackground } from "../../Asset/loginBackground";
+import { Link } from "@nextui-org/react";
+// import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [isVisible, setIsVisible] = React.useState(false);
+  const [isAnimating, setIsAnimating] = React.useState(false);
+  // const navigate = useNavigate();
+
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const googleAuth = () => {
@@ -17,10 +24,46 @@ export default function Login() {
     );
   };
 
+  const startAnimations = () => {
+    setIsAnimating(true);
+  };
+
+  // const onAnimationEnd = () => {
+  //   setTimeout(() => {
+  //     navigate("/home");
+  //   }, 100);
+  // };
+
   return (
-    <div className="fixed top-0 left-0 w-3/5 h-full bg-gray-900">
-      <div className="fixed top-0 right-24 flex justify-center items-center h-screen">
-        <div className="border-2 border-gray-300 rounded-xl p-4 w-[350px]">
+    <div className="fixed top-0 left-0 w-3/5 h-full">
+      <div className="fixed top-80 left-5 flex-wrap justify-center col-span-full">
+        <h1 style={{ fontSize: "5.25rem", color: "white" }}>RMS</h1>
+        <h1 style={{ fontSize: "2.75rem", color: "white" }}>
+          Empower Your Resources:
+        </h1>
+        <h1 style={{ fontSize: "2.75rem", color: "white" }}>
+          Streamline & Optimize
+        </h1>
+      </div>
+      <LoginBackground />
+      <div className="fixed bottom-0 left-0">
+        <footer style={{ fontSize: "1.00rem", color: "white" }}>
+          Searce© Contact About Us
+        </footer>
+      </div>
+      <div
+        // onAnimationEnd={onAnimationEnd}
+        className="login-div fixed top-0 right-24 flex justify-center items-center h-screen"
+        style={{ paddingTop: "6.25rem" }}
+      >
+        <div className={`lock-circle ${isAnimating ? "animate" : ""}`}>
+          <div className="lock-circle-inside"></div>
+          <div className={`lock-box ${isAnimating ? "animate" : ""}`}></div>
+        </div>
+        <div
+          style={{ borderColor: "rgba(21,47,193,255)" }}
+          className="border-2 rounded-xl p-4 w-[21.875rem] bg-white"
+        >
           <div className="flex flex-col gap-5">
             <Input
               isRequired
@@ -47,12 +90,21 @@ export default function Login() {
               }
               type={isVisible ? "text" : "password"}
             />
-            <Button color="primary" variant="ghost">
+            <Button color="primary" variant="ghost" onClick={startAnimations}>
               Login
             </Button>
-            <p>Forgot Password?</p>
+            <Link href="https://support.google.com/" underline="hover">
+              Forgot Password?
+            </Link>
             <Divider className="my-1" />
-            <Button color="primary" variant="bordered" onClick={googleAuth}>
+            <Button
+              color="primary"
+              variant="bordered"
+              onClick={() => {
+                googleAuth();
+                startAnimations();
+              }}
+            >
               <GoogleIcon />
               Login with Google
             </Button>

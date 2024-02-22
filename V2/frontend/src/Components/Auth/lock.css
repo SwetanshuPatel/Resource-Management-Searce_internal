@@ -1,0 +1,76 @@
+@keyframes unlock-circle {
+  0% {
+    bottom: 11.875rem;
+  }
+  100% {
+    bottom: 15rem;
+  }
+}
+
+@keyframes unlock-box {
+  0% {
+    bottom: 2.5rem;
+  }
+  100% {
+    bottom: 3.75rem;
+  }
+}
+
+body {
+  margin: 0rem;
+  background-color: #ffffff;
+}
+
+.wrapper {
+  height: 25rem;
+  width: 18.75rem;
+  margin-top: 12.5rem;
+  margin-right: -3.125rem;
+}
+
+.lock-circle {
+  height: 11.875rem;
+  width: 11.25rem;
+  border-radius: 2.813rem;
+  z-index: -1;
+  background-color: #152fc1;
+  position: relative;
+  margin: 0 auto;
+  left: 16.563rem;
+  bottom: 11.5rem;
+}
+
+.lock-circle.animate {
+  animation-name: unlock-circle;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.lock-circle-inside {
+  height: 11.25rem;
+  width: 8.75rem;
+  border-radius: 1.875rem;
+  z-index: 20;
+  background-color: #ffffff;
+  position: relative;
+  margin: 0 auto;
+  top: 1.10rem;
+}
+
+.lock-box {
+  position: relative;
+  height: 3.125rem;
+  width: 3.125rem;
+  background-color: #ffffff;
+  bottom: 2.5rem;
+  left: 8.125rem;
+  z-index: 80;
+}
+
+.lock-box.animate {
+  animation-name: unlock-box;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
