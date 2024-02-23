@@ -1,12 +1,12 @@
 import React from "react";
 import { Input } from "@nextui-org/react";
-import { EyeFilledIcon } from "./EyeFilledIcon";
-import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
+import { EyeFilledIcon } from "../Components/Auth/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "../Components/Auth/EyeSlashFilledIcon";
 import { Button } from "@nextui-org/react";
 import { Divider } from "@nextui-org/react";
-import { GoogleIcon } from "./GoogleIcon";
-import "./lock.css";
-import { LoginBackground } from "../../Asset/loginBackground";
+import { GoogleIcon } from "../Components/Auth/GoogleIcon";
+import "../Components/Auth/lock.css";
+import { LoginBackground } from "../Asset/loginBackground";
 import { Link } from "@nextui-org/react";
 // import { useNavigate } from "react-router-dom";
 
@@ -36,7 +36,7 @@ export default function Login() {
 
   return (
     <div className="fixed top-0 left-0 w-3/5 h-full">
-      <div className="fixed top-80 left-5 flex-wrap justify-center col-span-full">
+      <div className="fixed top-60 left-5 flex-wrap justify-center col-span-full">
         <h1 style={{ fontSize: "5.25rem", color: "white" }}>RMS</h1>
         <h1 style={{ fontSize: "2.75rem", color: "white" }}>
           Empower Your Resources:

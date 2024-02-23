@@ -20,7 +20,7 @@ conn.login(SF_USERNAME, SF_PASSWORD + SF_TOKEN, (err, UserInfo) => {
 });
 
 app.listen(SF_PORT, () => {
-  console.log(`server is running on http://localhost:${SF_PORT}/`);
+  console.log(`server is running on http://localhost:${SF_PORT}`);
 });
 
 app.get("/salesforce", (req, res) => {

@@ -1,4 +1,5 @@
 import React from "react";
+import "../Components/Home/home.css";
 import {
   Dropdown,
   DropdownTrigger,
@@ -6,26 +7,27 @@ import {
   DropdownItem,
   User,
 } from "@nextui-org/react";
+import { SearceLogo } from "../Asset/searce";
 import { Card, CardBody, Image } from "@nextui-org/react";
-import { IconHome } from "../../Asset/icon_home";
-import { IconProject } from "../../Asset/icon_projects";
-import { IconResources } from "../../Asset/icon_resources";
-import { IconTeam } from "../../Asset/icon_team";
-import { IconOppor } from "../../Asset/icon_opportunity";
-import { IconUtilization } from "../../Asset/icon_utilization";
+import { IconHome } from "../Asset/icon_home";
+import { IconProject } from "../Asset/icon_projects";
+import { IconResources } from "../Asset/icon_resources";
+import { IconTeam } from "../Asset/icon_team";
+import { IconOppor } from "../Asset/icon_opportunity";
+import { IconUtilization } from "../Asset/icon_utilization";
 // import { IconHandWave } from "../../Asset/icon_handwave";
-import SearceLogo from "../../Asset/searce.png";
-import RevenuePhoto from "../../Asset/dollar.png";
-import ProjectPhoto from "../../Asset/project.png";
-import ResourcePhoto from "../../Asset/resource.png";
-import ProgressPhoto from "../../Asset/progress.png";
+import RevenuePhoto from "../Asset/dollar.png";
+import ProjectPhoto from "../Asset/project.png";
+import ResourcePhoto from "../Asset/resource.png";
+import ProgressPhoto from "../Asset/progress.png";
 import ApexChart from "react-apexcharts";
-import { graph_options } from "./graph_options";
-import { graph_series } from "./graph_series";
-import { donut_options } from "./pie_option";
-import { donut_series } from "./pie_series";
+import { graph_options } from "../Components/Home/graph_options";
+import { graph_series } from "../Components/Home/graph_series";
+import { donut_options } from "../Components/Home/pie_option";
+import { donut_series } from "../Components/Home/pie_series";
 import { Spinner } from "@nextui-org/react";
 import { DataGrid } from "@mui/x-data-grid";
+import { Progress } from "@nextui-org/react";
 
 export default function Home(userDetails) {
   React.useEffect(() => {
@@ -35,14 +37,13 @@ export default function Home(userDetails) {
   const user = userDetails.user;
   const [data, setdata] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-
   const logout = () => {
     window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`, "_self");
   };
 
   const getData = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/`);
+      const response = await fetch(`http://localhost:4000/salesforce`);
       const result = await response.json();
       setdata(result);
       setIsLoading(false);
@@ -69,16 +70,16 @@ export default function Home(userDetails) {
 
   return (
     <>
-      <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div class="px-3 py-3 lg:px-5 lg:pl-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center justify-start rtl:justify-end">
-              <a href="https://searce.com" class="flex ms-2 md:me-24">
-                <img src={SearceLogo} class="h-8 me-3" alt="Searce Logo" />
+      <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div className="px-3 py-3 lg:px-5 lg:pl-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center justify-start rtl:justify-end">
+              <a href="https://searce.com" className="flex ms-2 md:me-24">
+                <SearceLogo />
               </a>
             </div>
-            <div class="flex items-center">
-              <div class="flex items-center ms-3">
+            <div className="flex items-center">
+              <div className="flex items-center ms-3">
                 <Dropdown>
                   <DropdownTrigger>
                     <User
@@ -110,77 +111,81 @@ export default function Home(userDetails) {
       </nav>
       <aside
         id="logo-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-gray-100 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        className="fixed top-0 left-0 z-40 w-52 h-screen pt-20 transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div class="h-full px-3 pb-4 overflow-y-auto bg-gray-100 dark:bg-gray-800">
-          <ul class="space-y-2 font-medium">
+        <div className="h-full px-3 pb-4 overflow-y-auto">
+          <ul className="space-y-2 font-medium">
             <li>
               <a
                 href="http://localhost:3000/home"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-black rounded-lg hover:bg-blue-700 hover:text-white group"
               >
                 <IconHome />
-                <span class="flex-1 ms-3 whitespace-nowrap">Home</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Home</span>
               </a>
             </li>
             <li>
               <a
                 href="http://localhost:3000/projects"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-black rounded-lg hover:bg-blue-700 hover:text-white group"
               >
                 <IconProject />
-                <span class="flex-1 ms-3 whitespace-nowrap">Projects</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Projects</span>
               </a>
             </li>
             <li>
               <a
                 href="http://localhost:3000/resource"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-black rounded-lg hover:bg-blue-700 hover:text-white group"
               >
                 <IconResources />
-                <span class="flex-1 ms-3 whitespace-nowrap">Resources</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Resources</span>
               </a>
             </li>
             <li>
               <a
                 href="http://localhost:3000/team"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-black rounded-lg hover:bg-blue-700 hover:text-white group"
               >
                 <IconTeam />
-                <span class="flex-1 ms-3 whitespace-nowrap">My Team</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">My Team</span>
               </a>
             </li>
             <li>
               <a
                 href="http://localhost:3000/opportunity"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-black rounded-lg hover:bg-blue-700 hover:text-white group"
               >
                 <IconOppor />
-                <span class="flex-1 ms-3 whitespace-nowrap">Opportunities</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Opportunities
+                </span>
               </a>
             </li>
             <li>
               <a
                 href="http://localhost:3000/utilization"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-black rounded-lg hover:bg-blue-700 hover:text-white group"
               >
                 <IconUtilization />
-                <span class="flex-1 ms-3 whitespace-nowrap">Utilization</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Utilization
+                </span>
               </a>
             </li>
           </ul>
         </div>
       </aside>
-      <div class="p-4 sm:ml-64">
-        <div class="p-4 mt-14">
-          <div class="grid grid-cols-3 mb-6">
+      <div className="p-2 sm:ml-52">
+        <div className="p-4 mt-14">
+          <div className="grid grid-cols-3 mb-6">
             <h1 style={{ fontSize: "2.5rem", fontFamily: "initial" }}>
               Hey, {user.name}
             </h1>
             {/* <IconHandWave /> */}
           </div>
-          <div class="grid grid-cols-4 gap-4 mb-4">
+          <div className="grid grid-cols-4 gap-4 mb-14">
             <Card
               isBlurred
               className="border-2 border-purple-700 max-w-[610px]"
@@ -254,7 +259,7 @@ export default function Home(userDetails) {
                 <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
                   <div className="relative col-span-6 md:col-span-4">
                     <Image
-                      alt="Project Image"
+                      alt="Resource Image"
                       height={200}
                       shadow="sm"
                       src={ResourcePhoto}
@@ -269,7 +274,7 @@ export default function Home(userDetails) {
                         </h3>
                         <h1 className="text-large font-extrabold mt-1">10</h1>
                         <p className="text-small text-foreground/80 mt-2">
-                          Forecast:
+                          Available Resources:
                         </p>
                       </div>
                     </div>
@@ -286,22 +291,26 @@ export default function Home(userDetails) {
                 <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
                   <div className="relative col-span-6 md:col-span-4">
                     <Image
-                      alt="Project Image"
+                      alt="Progress Image"
                       height={200}
                       shadow="sm"
                       src={ProgressPhoto}
                       width="100%"
                     />
                   </div>
-                  <div className="flex flex-col col-span-2 md:col-span-8">
+                  <div className="flex flex-col col-span-1 md:col-span-8">
                     <div className="flex justify-between items-start">
                       <div className="flex flex-col gap-0">
                         <h3 className="font-bold text-foreground/90">
                           PROGRESS
                         </h3>
                         <h1 className="text-large font-extrabold mt-1">70%</h1>
-                        <p className="text-small text-foreground/80 mt-2">
-                          Forecast:
+                        <p className="mt-4">
+                          <Progress
+                            size="sm"
+                            aria-label="Loading..."
+                            value={70}
+                          />
                         </p>
                       </div>
                     </div>
@@ -310,26 +319,27 @@ export default function Home(userDetails) {
               </CardBody>
             </Card>
           </div>
-          <div class="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-10 mb-10">
             <ApexChart
               options={graph_options}
               series={graph_series}
               type="bar"
-              width={500}
-              height={300}
+              width={570}
+              height={350}
+              shadow="md"
             />
             <ApexChart
               options={donut_options}
               series={donut_series}
               type="donut"
-              width={500}
-              height={300}
+              width={570}
+              height={350}
             />
           </div>
-          <div class="grid grid-cols-1 gap-4 mb-4">
+          <div className="grid grid-cols-1 mb-4">
             Opportunities - SalesForce
           </div>
-          <div class="grid grid-cols-1 gap-4 mb-4">
+          <div className="grid grid-cols-1 mb-4">
             {isLoading ? (
               <Spinner label="Loading..." />
             ) : (

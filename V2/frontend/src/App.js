@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
-import Login from "./Components/Auth/login";
-import Home from "./Components/Home/home";
-import Projects from "./Components/Projects/project";
+import Login from "./Pages/login";
+import Home from "./Pages/home";
+import Projects from "./Pages/project";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -27,19 +27,25 @@ export default function App() {
       <Route
         exact
         path="/"
-        element={user ? <Home user={user} /> : <Navigate to="/login" />}
+        element={
+          user ? <Home user={user} /> : <Navigate to="Login" />
+        }
       />
       <Route
         exact
         path="/home"
-        element={user ? <Home user={user} /> : <Navigate to="/login" />}
+        element={user ? <Home user={user} /> : <Login />}
       />
       <Route
         exact
         path="/login"
-        element={user ? <Navigate to="/home" /> : <Login />}
+        element={user ? <Home user={user} /> : <Login />}
       />
-      <Route exact path="/projects" element={<Projects />} />
+      <Route
+        exact
+        path="/projects"
+        element={user ? <Projects user={user} /> : <Login />}
+      />
     </Routes>
   );
 }
